@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Outline))]
+[RequireComponent(typeof(Outline)), RequireComponent(typeof(Rigidbody))]
 public class CollectableItems : MonoBehaviour, ICollectable
 {
+    private Rigidbody _rigidbody;
     private Outline _outline;
     [SerializeField] private GameObject _hand;
+
+
     public void Collect()
     {
         Destroy(gameObject);
@@ -28,6 +31,7 @@ public class CollectableItems : MonoBehaviour, ICollectable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _rigidbody = GetComponent<Rigidbody>();
         _outline = GetComponentInChildren<Outline>();
         _outline.enabled = false;
     }
